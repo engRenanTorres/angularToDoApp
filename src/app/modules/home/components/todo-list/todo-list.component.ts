@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-todo-list',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent {
-
+  public faTrash = faTrashCan;
 }

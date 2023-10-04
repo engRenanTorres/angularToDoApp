@@ -1,8 +1,8 @@
 <section>
     <ul>
-        <li>
-            <input type="checkbox"/>
-            <input type="text"/>
+        <li *ngFor="let item of Tasks; let i = index">
+            <input type="checkbox" [(ngModel)]="item.checked"/>
+            <input type="text" [(ngModel)]="item.task"/>
             <button>
                 <fa-icon [icon]="faTrash"></fa-icon>
             </button>

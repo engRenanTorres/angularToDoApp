@@ -6,6 +6,7 @@ import { TodoInputAddItemsComponent } from './components/todo-input-add-items/to
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,11 +16,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TodoButtonDeleteAllComponent,
     TodoInputAddItemsComponent,
     TodoListComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     CommonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
   ]
 })
 export class HomeModule { }

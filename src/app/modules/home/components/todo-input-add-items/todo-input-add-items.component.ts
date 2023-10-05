@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -8,4 +8,13 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 })
 export class TodoInputAddItemsComponent {
   public faCart = faShoppingCart;
+  @Output() public emitItemTaskList = new EventEmitter();
+
+  public addItemTaskList = "";
+
+  public submitItemTaskList(){
+    this.addItemTaskList = this.addItemTaskList.trim();
+    if(this.addItemTaskList) this.emitItemTaskList.emit(this.addItemTaskList);
+    this.addItemTaskList = "";
+  }
 }

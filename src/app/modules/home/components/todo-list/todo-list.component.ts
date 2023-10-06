@@ -1,4 +1,4 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { TaskList } from '../../model/task-list';
 import { ProductListService } from '../../../../services/product-list.service';
@@ -8,19 +8,39 @@ import { ProductListService } from '../../../../services/product-list.service';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent implements DoCheck {
+export class TodoListComponent implements DoCheck, OnInit {
   public faTrash = faTrashCan;
   public tasks: TaskList[]= [];
 
-  constructor(private listService: ProductListService) {
-    this.tasks = listService.productList();
+  constructor(private listService: ProductListService){} 
+  ngOnInit(): void {
   }
+
+
   ngDoCheck(): void {
-    this.listService.setLocalStorage();
+    this.setLocalStorage();
   }
-  public setEmitTaskList = this.listService.setEmitTaskList;
-  public validationInput = this.listService.validationInput;
-  public deleteItem = this.listService.deleteItem;
-  public deleteAll = this.listService.deleteAll;
+  public setEmitTaskList(event:string){
+    this.tasks.push({task: event, checked: false})
+  };
+  public validationInput(event:string, index: number) {
+    if(!event.length) {
+      const confirm = window.confirm("Produto vazio, deseja deletar?")
+      if (confirm) this.deleteItem(index);
+    }
+  }
+  public deleteItem(event: number) {
+    this.tasks.splice(event,1);
+  };
+  public deleteAll() {
+    const confirm = window.confirm("Você realmente deseja apagar todos?");
+    if (confirm) this.tasks = [];
+  }
+  public setLocalStorage(){
+    if(this.tasks){
+      this.tasks.sort((first, last)=> Number(first.checked) - Number(last.checked));
+      localStorage.setItem('tasktasks',JSON.stringify(this.tasks));
+    }
+  }
 
 }
